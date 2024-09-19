@@ -86,8 +86,11 @@ for si, stage in enumerate(stages_to_perform):
         model = XMemTrainer(config, logger=logger, 
                         save_path=path.join('saves', long_id, long_id) if long_id is not None else None, 
                         local_rank=local_rank, world_size=world_size).train()
+        print("save_path: ", model.save_path)
     else:
         # Construct model for other ranks
+        print('I will take the role of training!')
+        print("save_path: ", model.save_path)
         model = XMemTrainer(config, local_rank=local_rank, world_size=world_size).train()
 
     # Load pertrained model if needed
